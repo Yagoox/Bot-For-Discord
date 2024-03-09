@@ -1,5 +1,3 @@
 # CipherBot
  
 teste
-linha teste
-
