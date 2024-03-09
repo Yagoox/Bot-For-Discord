@@ -20,6 +20,7 @@ async function loadSlashCommands(path) {
                 if (cmd.data && cmd.execute) {
                     ArraySlashs.push(cmd.data);
                     CollectionSlashs.set(cmd.data.name, cmd.execute);
+                    console.log(`Comando Registrado: ${cmd.data.name}`);
                 }
             }
         }
@@ -30,9 +31,10 @@ loadSlashCommands("./commands");
 
 export async function RegistrySlash(ID) {
     try {
-        const commands = APICONNECTION.put(Routes.applicationCommands(ID), { body: ArraySlashs });
+        const commands = await APICONNECTION.put(Routes.applicationCommands(ID), { body: ArraySlashs });
         console.log(`Eu registrei ${commands.length} SlashCommands`);
     } catch (err) {
         console.error(err);
     }
 }
+

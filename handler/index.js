@@ -16,13 +16,13 @@ const client = new Client({
 
 
 client.on('ready', async (c) => {
-
-    await RegistrySlash(self.application.id)
+    await RegistrySlash(client.application.id)
     console.log(`✅ ${c.user.tag} is online.`);
 });
 
 client.on("interactionCreate", async (interaction) => {
 
+    console.log(`interaçao recebida: ${interaction.commandName}`);
     if (interaction.isChatInputCommand()) {
 
         try {

@@ -1,11 +1,12 @@
 import { SlashCommandBuilder } from "discord.js";
 
 export const data = new SlashCommandBuilder()
+
     .setName("hello_world")
     .setDescription("Comando teste")
     .toJSON()
 
-export async function execute(interecation) {
+export async function execute(interaction) {
 
-    interecation.reply({content: `hello ${interecation.user}`})
+    interaction.reply({content: `hello ${interaction.user}`})
 }
