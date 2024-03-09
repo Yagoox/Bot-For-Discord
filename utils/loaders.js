@@ -57,7 +57,7 @@ export async function RegistrySlash(ID) {
         const commands = await APICONNECTION.put(Routes.applicationCommands(ID), { body: ArraySlashs });
         console.log(`Eu registrei ${commands.length} SlashCommands`);
     } catch (err) {
-        
+
         console.error(`Erro ao registrar comandos slash: ${err.message}`);
     }
 }
