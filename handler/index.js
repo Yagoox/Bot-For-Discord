@@ -1,7 +1,5 @@
 const { Client, IntentsBitField } = require('discord.js');
-require('dotenv').config();
-
-const tokenbot = process.env.TOKEN;
+require('dotenv').config()
 
 const client = new Client({
     intents: [
@@ -12,8 +10,11 @@ const client = new Client({
     ]
 });
 
+
 client.on('ready', (c) => {
+
     console.log(`✅ ${c.user.tag} is online.`);
+    console.log(process.env.TOKEN);
 });
 
 
