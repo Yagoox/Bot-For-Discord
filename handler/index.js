@@ -15,11 +15,21 @@ const client = new Client({
 });
 
 client.on('messageCreate', message => {
-    
+
     console.log(`Mensagem recebida: ${message.content} de ${message.author.tag}`);
+
 });
 
-client.on('ready', async (c) => {
+//    TESTE
+
+// client.on('messageCreate', message => {
+   // if (message.content.startsWith('/')) {
+       // console.log(`Comando recebido: ${message.content} de ${message.author.tag}`);
+       // message.reply("fala")
+    //}
+//});
+
+client.once('ready', async (c) => {
 
     console.log(`Iniciando o registro de comandos slash para o ID: ${client.application.id}`);
     try {
