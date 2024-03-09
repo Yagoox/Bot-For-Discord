@@ -1,5 +1,7 @@
-const { Client, IntentsBitField } = require('discord.js');
-require('dotenv').config();
+import { Client, IntentsBitField } from 'discord.js';
+import { RegistrySlash, CollectionSlashs } from '../utils/loaders.js';
+import dotenv from 'dotenv';
+dotenv.config();
 const token = process.env.TOKEN;
 
 
@@ -13,11 +15,25 @@ const client = new Client({
 });
 
 
-client.on('ready', (c) => {
+client.on('ready', async (c) => {
 
+    await RegistrySlash(self.application.id)
     console.log(`✅ ${c.user.tag} is online.`);
-    console.log(token);
 });
 
+client.on("interactionCreate", async (interaction) => {
+
+    if (interaction.isChatInputCommand()) {
+
+        try {
+
+            const commandName = interaction.commandName
+            await CollectionSlashs.get(`${commandName}`)(interaction)
+        } catch (err) {
+
+            console.error(err)
+        }
+    }
+})
 
 client.login(token);
