@@ -26,6 +26,8 @@ client.on('messageCreate', message => {
    // if (message.content.startsWith('/')) {
        // console.log(`Comando recebido: ${message.content} de ${message.author.tag}`);
        // message.reply("fala")
+                    // retirar 1 letra da mensagem "/"
+     //  const command = message.content.slice(1);
     //}
 //});
 
