@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js";
 
 export const data = new SlashCommandBuilder()
 
-    .setName("hello_world")
+    .setName("hellow")
     .setDescription("Comando teste")
     .toJSON()
 
