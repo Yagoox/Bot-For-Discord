@@ -7,7 +7,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 //      DotEnv
 const dotenv = require('dotenv')
 dotenv.config();
-const {TOKEN, CLIENT_ID, GUILD_ID} = process.env;
+const { TOKEN, CLIENT_ID, GUILD_ID } = process.env;
 
 
 
@@ -59,8 +59,21 @@ try {
 
 //      Listener de interaçao
 
-client.on(Events.InteractionCreate, interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 
     if (!interaction.isChatInputCommand()) return
-    console.log(interaction)
+
+    const command = interaction.client.commands.get(interaction.commandName)
+    if (!command) {
+
+        console.log("Comando nao encontrado")
+        return
+    } try {
+
+        await command.execute(interaction)
+    } catch (error) {
+
+        console.error(error)
+        await interaction.reply("Houve um erro ao tentar executar este comando!")
+    }
 });
