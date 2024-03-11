@@ -1,7 +1,8 @@
 const { SlashCommandBuilder } = require("discord.js")
 
+//      Exportando e criando slashcommand
 module.exports = {
-    
+
     data: new SlashCommandBuilder()
         .setName("limpar")
         .setDescription("Limpar quantia de Mensagens")
@@ -11,12 +12,13 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
-
+        //      Interaçao com com o slashcommand
         const quantidade = interaction.options.getInteger('quantidade');
+
         if (quantidade <= 0) {
             return interaction.reply("Você precisa colocar um número valido!")
         }
-
+        //      Tratamento de erro devido a APi nao deixar excluir mensagem de +14 dias atras
         try {
 
             const fetched = await interaction.channel.messages.fetch({ limit: quantidade });
