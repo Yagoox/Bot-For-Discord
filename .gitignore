@@ -1,1 +1,2 @@
-CipherBot/.env
+/node_modules
+.env
