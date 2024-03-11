@@ -26,6 +26,7 @@ const rest = new REST({ version: "10" }).setToken(TOKEN);
     (async () => {
 
         try {
+    
             console.log(`Resetando ${commands.length} comandos...`)
 
             //      Put
