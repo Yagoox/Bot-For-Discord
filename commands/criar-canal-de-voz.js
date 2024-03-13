@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder, EmbedBuilder, Events, Client, ChannelType, PermissionsBitField } = require('discord.js');
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder, EmbedBuilder, PermissionsBitField } = require('discord.js');
 
 // Criação Embed'
 const embedInfotBot = new EmbedBuilder()
@@ -13,6 +13,13 @@ module.exports = {
         .setName("criarcanal")
         .setDescription("Crie um canal de voz."),
     async execute(interaction) {
+
+        const member = interaction.member;
+
+        if (!member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+
+            return interaction.reply({ content: 'Desculpe, você não tem permissão para utilizar este comando!', ephemeral: true});
+        }
 
         const criar_canal = new ButtonBuilder()
             .setCustomId('criar_canal')

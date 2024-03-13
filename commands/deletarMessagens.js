@@ -22,7 +22,8 @@ module.exports = {
         {
 
             if (quantidade <= 0) {
-                return interaction.reply("Você precisa colocar um número valido!")
+            
+                return interaction.reply({ content: 'Você precisa colocar um número valido!', ephemeral: true});
             }
             //      Tratamento de erro devido a APi nao deixar excluir mensagem de +14 dias atras
             try {
@@ -42,11 +43,11 @@ module.exports = {
             } catch (error) {
 
                 console.error(error);
-                await interaction.reply(`Não foi possível deletar mensagens devido a: ${error}`);
+                await interaction.reply({ content: `Não foi possível deletar mensagens devido a: ${error}`, ephemeral: true});
             }
     } else {
 
-        await interaction.reply("Você nao tem permissão para utilizar este comando!")
+        await interaction.reply({ content:'Você nao tem permissão para utilizar este comando!', ephemeral: true})
     }
   }
 }

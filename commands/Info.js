@@ -14,6 +14,6 @@ module.exports = {
         .setDescription("Informações do CipherBot"),
     async execute(interaction) {
 
-        await interaction.reply({ embeds: [embedInfotBot] })
+        await interaction.reply({ embeds: [embedInfotBot], ephemeral: true })
     }
 }

@@ -93,10 +93,6 @@ client.on(Events.InteractionCreate, async interaction => {
                 parent:categoryId,
                 permissionOverwrites: [
                     {
-                        id: interaction.guild.id,
-                        deny: [PermissionsBitField.Flags.ViewChannel],
-                    },
-                    {
                         id: interaction.user.id,
                         allow: [PermissionsBitField.Flags.ViewChannel],
                     },
@@ -104,6 +100,15 @@ client.on(Events.InteractionCreate, async interaction => {
             });
 
             await interaction.followUp(`Canal criado <#${channel.id}>. Clique para entrar na call.`);
+
+            setTimeout(async () => {
+
+                if (channel.members.size === 0 ) {
+
+                    await channel.delete();
+                    console.log(`Canal ${channelName} foi excluído porque estava vazio.`);
+                }
+            }, 60000);
         }
     }  
 });
