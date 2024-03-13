@@ -1,18 +1,20 @@
 //      Importações
-const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Collection, NewsChannel, PermissionOverwrites, ChannelType, PermissionsBitField } = require('discord.js');
 
 //      Permissões
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 //      DotEnv
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const { channel } = require('node:diagnostics_channel');
 dotenv.config();
 const { TOKEN, CLIENT_ID, GUILD_ID } = process.env;
 
 
 
 //      Importação dos Comandos
-const fs = require("node:fs")
+const fs = require("node:fs");
+const { type } = require('node:os');
 const path = require("node:path")
 const commandsPath = path.join(__dirname, "commands")
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"))
@@ -33,12 +35,6 @@ for (const file of commandFiles) {
     }
 }
 
-//      Indentificação de Mensagem
-client.on('messageCreate', message => {
-
-    console.log(`Mensagem recebida: ${message.content} de ${message.author.tag}`);
-
-});
 
 //      Verificação bot Online
 client.once('ready', async (c) => {
@@ -61,19 +57,53 @@ try {
 
 client.on(Events.InteractionCreate, async interaction => {
 
-    if (!interaction.isChatInputCommand()) return
+    if (interaction.isChatInputCommand()) {
 
-    const command = interaction.client.commands.get(interaction.commandName)
-    if (!command) {
+        const command = interaction.client.commands.get(interaction.commandName);
+        if (!command) {
 
-        console.log("Comando nao encontrado")
-        return
-    } try {
+            console.log("Comando não encontrado");
+            return;
+        }
+        try {
+            await command.execute(interaction);
+        } catch (error) {
 
-        await command.execute(interaction)
-    } catch (error) {
-
-        console.error(error)
-        await interaction.reply("Houve um erro ao tentar executar este comando!")
+            console.error(error);
+            await interaction.reply({ content: "Houve um erro ao tentar executar este comando!", ephemeral: true });
+        }
     }
+    // Agora, tratamos as interações de botão
+    else if (interaction.isButton()) {
+
+        if (interaction.customId === 'criar_canal') {
+            
+            await interaction.deferReply({ ephemeral: true});
+
+            const randomId = Math.floor(Math.random() * 10000)
+            const emoji = '🔹';
+            const categoryId = '1209349551169998881'
+            const channelName = `${emoji} Interagindo-${randomId}`
+
+            // Criação do canal
+            const channel = await interaction.guild.channels.create({
+                name: channelName,
+                type: ChannelType.GuildVoice,
+                position: 2147483647,
+                parent:categoryId,
+                permissionOverwrites: [
+                    {
+                        id: interaction.guild.id,
+                        deny: [PermissionsBitField.Flags.ViewChannel],
+                    },
+                    {
+                        id: interaction.user.id,
+                        allow: [PermissionsBitField.Flags.ViewChannel],
+                    },
+                ],
+            });
+
+            await interaction.followUp(`Canal criado <#${channel.id}>. Clique para entrar na call.`);
+        }
+    }  
 });
