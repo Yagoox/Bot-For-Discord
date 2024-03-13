@@ -11,7 +11,8 @@ module.exports = {
         .addIntegerOption(option =>
             option.setName('quantidade')
                 .setDescription('Quantidade de mensagens para deletar')
-                .setRequired(true)),
+                .setRequired(true))
+                .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
 
     async execute(interaction) {
         //      Interaçao com com o slashcommand

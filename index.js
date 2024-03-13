@@ -1,5 +1,5 @@
 //      Importações
-const { Client, Events, GatewayIntentBits, Collection, NewsChannel, PermissionOverwrites, ChannelType, PermissionsBitField } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Collection, NewsChannel, PermissionOverwrites, ChannelType, PermissionsBitField, IntentsBitField } = require('discord.js');
 
 //      Permissões
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
