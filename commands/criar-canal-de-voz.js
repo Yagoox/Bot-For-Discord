@@ -11,7 +11,8 @@ const embedInfotBot = new EmbedBuilder()
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("criarcanal")
-        .setDescription("Crie um canal de voz."),
+        .setDescription("Crie um canal de voz.")
+        .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
     async execute(interaction) {
 
         const member = interaction.member;
