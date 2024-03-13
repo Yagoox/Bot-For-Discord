@@ -52,11 +52,11 @@ module.exports = {
                 try {
                     const permissions = {
                         VIEW_CHANNEL: true,
-                        SEND_MESSAGES: false, // Desabilita o envio de mensagens em canais de texto
-                        SPEAK: false, // Desabilita a fala em canais de voz
-                        ADD_REACTIONS: false, // Opcional: desabilita adicionar reações
-                        CREATE_INSTANT_INVITE: false, // Opcional: desabilita a criação de convites
-                        SEND_TTS_MESSAGES: false, // Opcional: desabilita mensagens TTS (Text-To-Speech)
+                        SEND_MESSAGES: false,
+                        SPEAK: false, 
+                        ADD_REACTIONS: false,
+                        CREATE_INSTANT_INVITE: false, 
+                        SEND_TTS_MESSAGES: false, 
                     };
             
                     // Checa o tipo do canal e aplica as permissões apropriadas
