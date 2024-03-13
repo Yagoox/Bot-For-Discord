@@ -73,7 +73,7 @@ client.on(Events.InteractionCreate, async interaction => {
             await interaction.reply({ content: "Houve um erro ao tentar executar este comando!", ephemeral: true });
         }
     }
-    // Agora, tratamos as interações de botão
+    //      Interaçao botao
     else if (interaction.isButton()) {
 
         if (interaction.customId === 'criar_canal') {
@@ -85,7 +85,7 @@ client.on(Events.InteractionCreate, async interaction => {
             const categoryId = '1209349551169998881'
             const channelName = `${emoji} Interagindo-${randomId}`
 
-            // Criação do canal
+            //      Criação do canal
             const channel = await interaction.guild.channels.create({
                 name: channelName,
                 type: ChannelType.GuildVoice,
