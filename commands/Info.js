@@ -15,9 +15,9 @@ module.exports = {
     async execute(interaction) {
 
         const criar_canal = new ButtonBuilder()
-        .setCustomId('Ver Mais')
-        .setLabel('Criar Call')
-        .setStyle(ButtonStyle.Link);
+        .setLabel('Ver Mais')
+        .setStyle(ButtonStyle.Link)
+        .setURL('https://i.postimg.cc/yYXtx2X0/Whats-App-Image-2024-03-11-at-7-20-53-PM.jpg');
 
         const row = new ActionRowBuilder()
         .addComponents(criar_canal);
