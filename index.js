@@ -37,22 +37,11 @@ for (const file of commandFiles) {
 
 
 //      Verificação bot Online
+// Verificação bot Online
 client.once('ready', async (c) => {
 
     console.log(`✅ ${c.user.tag} is online.`);
-    
-    // Percorre todos os servidores que o bot está conectado
-    client.guilds.cache.each((guild) => {
-        console.log(`Servidor: ${guild.name}`);
-        
-        // Percorre todos os canais do servidor
-        guild.channels.cache.each((channel) => {
-            // Verifica se o canal é de texto ou voz{
-                console.log(`Canal: ${channel.name}`)
-        });
-    });
-
-});
+}); //aqui acaba o once
 
 
 
