@@ -40,8 +40,20 @@ for (const file of commandFiles) {
 client.once('ready', async (c) => {
 
     console.log(`✅ ${c.user.tag} is online.`);
+    
+    // Percorre todos os servidores que o bot está conectado
+    client.guilds.cache.each((guild) => {
+        console.log(`Servidor: ${guild.name}`);
+        
+        // Percorre todos os canais do servidor
+        guild.channels.cache.each((channel) => {
+            // Verifica se o canal é de texto ou voz{
+                console.log(`Canal: ${channel.name}`)
+        });
+    });
 
 });
+
 
 
 //      Verificação Token
@@ -72,6 +84,8 @@ client.on(Events.InteractionCreate, async interaction => {
             console.error(error);
             await interaction.reply({ content: "Houve um erro ao tentar executar este comando!", ephemeral: true });
         }
+
+        
     }
     //      Interaçao botao
     else if (interaction.isButton()) {
