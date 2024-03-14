@@ -10,8 +10,6 @@ const { channel } = require('node:diagnostics_channel');
 dotenv.config();
 const { TOKEN, CLIENT_ID, GUILD_ID } = process.env;
 
-
-
 //      Importação dos Comandos
 const fs = require("node:fs");
 const { type } = require('node:os');
