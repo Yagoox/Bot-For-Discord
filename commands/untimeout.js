@@ -30,13 +30,14 @@ module.exports = {
             .setColor(0x0099FF)
             .setTitle('Aviso Mute')
             .setAuthor({ name: 'CipherBot', iconURL: 'https://i.postimg.cc/yYXtx2X0/Whats-App-Image-2024-03-11-at-7-20-53-PM.jpg'})
-            .setDescription(`:white_check_mark: ${tempoUsuario.tag}' seu timeout **foi removido** | ${motivo}`)
+            .setDescription(`Você removeu TimeOut do usuario **@${tempoUsuario}**.`)
 
         const embedDM = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Aviso Mute')
             .setAuthor({ name: 'CipherBot', iconURL: 'https://i.postimg.cc/yYXtx2X0/Whats-App-Image-2024-03-11-at-7-20-53-PM.jpg'})
-            .setDescription(`:white_check_mark: Seu **timeout** foi removido ${interaction.guild.name} | ${motivo}`)
+            .setDescription(`Você foi desmutado no servidor **${interaction.guild.name}**.`)
+            .addFields({ name: 'Motivo', value: motivo })
 
         await tempoMember.send({ embeds: [embedDM]}).catch(err => {
 

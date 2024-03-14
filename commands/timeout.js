@@ -36,7 +36,7 @@ module.exports = {
 
         if (!tempoMember) return await interaction.reply({content: `Este membro não faz mais parte do servidor!`, ephemeral: true});
 
-        if (!tempoMember.kickable) return await interaction.reply({ content: `Eu não posso aplicar untimeout em úsuarios que estao acima de você!`, ephemeral: true});
+        //if (!tempoMember.kickable) return await interaction.reply({ content: `Eu não posso aplicar untimeout em úsuarios que estao acima de você!`, ephemeral: true});
 
         if (interaction.member.id === tempoMember) return await interaction.reply({ content: `Não posso aplciar timeout em você mesmo!`, ephemeral: true});
 
@@ -49,17 +49,19 @@ module.exports = {
 
         await  tempoMember.timeout(duracao * 1000);
 
-        const embed = new EmbedBuilder()
+            const embed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Aviso Mute')
             .setAuthor({ name: 'CipherBot', iconURL: 'https://i.postimg.cc/yYXtx2X0/Whats-App-Image-2024-03-11-at-7-20-53-PM.jpg'})
-            .setDescription(`:white_check_mark: ${tempoUsuario.tag} foi aplicado **timeout** por ${duracao / 60} minutos. | ${motivo}`)
+            .setDescription(`Você aplicou TimeOut no úsuario **@${tempoUsuario}** por ${duracao / 60} minutos.`)
 
         const embedDM = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Aviso Mute')
             .setAuthor({ name: 'CipherBot', iconURL: 'https://i.postimg.cc/yYXtx2X0/Whats-App-Image-2024-03-11-at-7-20-53-PM.jpg'})
-            .setDescription(`:white_check_mark: Você ja passou do tempo fora ${interaction.guild.name}. você pode verificar o status do seu tempo limite no servidor | ${motivo}`)
+            .setDescription(`Você foi mutado no servidor **${interaction.guild.name}**.`)
+            .addFields({ name: 'Motivo', value: motivo })
+            .addFields({ name: 'Tempo de Mute', value: `${duracao / 60} minutos` });
 
         await tempoMember.send({ embeds: [embedDM]}).catch(err => {
 
