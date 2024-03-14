@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js")
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
 
 //      Criaçao Embed
 const embedInfotBot = new EmbedBuilder()
@@ -14,6 +14,19 @@ module.exports = {
         .setDescription("Informações do CipherBot"),
     async execute(interaction) {
 
-        await interaction.reply({ embeds: [embedInfotBot], ephemeral: true })
+        const criar_canal = new ButtonBuilder()
+        .setCustomId('Ver Mais')
+        .setLabel('Criar Call')
+        .setStyle(ButtonStyle.Link);
+
+        const row = new ActionRowBuilder()
+        .addComponents(criar_canal);
+
+        await interaction.reply({
+            content: '',
+            embeds: [embedInfotBot],
+            components: [row],
+            ephemeral: true
+        });
     }
 }
