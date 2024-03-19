@@ -1,16 +1,12 @@
-//      Importações
 const { Client, Events, GatewayIntentBits, Collection, NewsChannel, PermissionOverwrites, ChannelType, PermissionsBitField, IntentsBitField } = require('discord.js');
-
-//      Permissões
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-//      DotEnv
 const dotenv = require('dotenv');
 const { channel } = require('node:diagnostics_channel');
 dotenv.config();
+
 const { TOKEN, CLIENT_ID, GUILD_ID } = process.env;
 
-//      Importação dos Comandos
 const fs = require("node:fs");
 const { type } = require('node:os');
 const path = require("node:path")
@@ -33,17 +29,11 @@ for (const file of commandFiles) {
     }
 }
 
-
-//      Verificação bot Online
-// Verificação bot Online
 client.once('ready', async (c) => {
 
     console.log(`✅ ${c.user.tag} is online.`);
-}); //aqui acaba o once
+});
 
-
-
-//      Verificação Token
 try {
     console.log(`Iniciando login com o token: ${TOKEN}`);
     client.login(TOKEN);
@@ -52,33 +42,25 @@ try {
     console.error(`Erro ao fazer login: ${err.message}`);
 }
 
-//      Listener de interaçao
-
 client.on(Events.InteractionCreate, async interaction => {
-
     if (interaction.isChatInputCommand()) {
-
         const command = interaction.client.commands.get(interaction.commandName);
         if (!command) {
-
             console.log("Comando não encontrado");
             return;
         }
         try {
             await command.execute(interaction);
         } catch (error) {
-
             console.error(error);
             await interaction.reply({ content: "Houve um erro ao tentar executar este comando!", ephemeral: true });
         }
 
         
     }
-    //      Interaçao botao
-    else if (interaction.isButton()) {
 
+    else if (interaction.isButton()) {
         if (interaction.customId === 'criar_canal') {
-            
             await interaction.deferReply({ ephemeral: true});
 
             const randomId = Math.floor(Math.random() * 10000)
@@ -86,7 +68,6 @@ client.on(Events.InteractionCreate, async interaction => {
             const categoryId = '1209349551169998881'
             const channelName = `${emoji} Interagindo-${randomId}`
 
-            //      Criação do canal
             const channel = await interaction.guild.channels.create({
                 name: channelName,
                 type: ChannelType.GuildVoice,
@@ -105,7 +86,6 @@ client.on(Events.InteractionCreate, async interaction => {
             setTimeout(async () => {
 
                 if (channel.members.size === 0 ) {
-
                     await channel.delete();
                     console.log(`Canal ${channelName} foi excluído porque estava vazio.`);
                 }

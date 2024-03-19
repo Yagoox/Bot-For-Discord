@@ -1,8 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionsBitField } = require("discord.js")
 
-
-
-//      Exportando e criando slashcommand
 module.exports = {
 
     data: new SlashCommandBuilder()
@@ -15,7 +12,7 @@ module.exports = {
                 .setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
 
     async execute(interaction) {
-        //      Interaçao com com o slashcommand
+
         const quantidade = interaction.options.getInteger('quantidade');
         const member = interaction.member;
 
@@ -33,7 +30,6 @@ module.exports = {
 
                 await interaction.channel.bulkDelete(fetched);
                 
-                //      Criaçao Embed
                 const embedInfotBot = new EmbedBuilder()
                     .setColor(0x0099FF)
                     .setAuthor({ name: 'ChiperBot', url: 'https://i.postimg.cc/yYXtx2X0/Whats-App-Image-2024-03-11-at-7-20-53-PM.jpg' })
